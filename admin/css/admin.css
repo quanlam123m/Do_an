@@ -1,0 +1,24 @@
+.header {
+  margin: 10rem 0 0 10rem;
+}
+
+.add {
+  margin: 2rem 0 0 10rem;
+}
+
+.tb-1 {
+  width: 100%;
+}
+
+table tr th {
+  border-bottom: 1px solid black;
+  padding: 2rem 2rem 2rem 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+table tr td {
+  padding: 2rem 2rem 2rem 0;
+  font-size: 15px;
+  text-align: center;
+}
