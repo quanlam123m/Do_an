@@ -28,13 +28,12 @@
         <nav class="navbar">
             <a class="active" href="index.html">home</a>
             <a href="menu.php">menu</a>
-            <a href="order.php">order</a>
         </nav>
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
             <i class="fas fa-search" id="search-icon"></i>
-            <a href="#" class="fas fa-shopping-cart"></a>
+            <a href="order.php" class="fas fa-shopping-cart"></a>
             <a href="login.php" class="fa fa-user"></a>
         </div>
 

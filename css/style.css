@@ -15,7 +15,6 @@
   text-decoration: none;
   outline: none;
   border: none;
-  text-transform: capitalize;
   transition: all 0.2s linear;
 }
 
@@ -62,7 +61,6 @@ section:nth-child(even) {
 
 .btn:hover {
   background: var(--green);
-  letter-spacing: 0.1rem;
 }
 
 /* CSS Header */
@@ -536,7 +534,7 @@ header .icons #menu-bars {
   margin: 0 auto;
 }
 
-.order .order__menu .order__body {
+.order .order__menu .order__body table {
   overflow-y: auto;
   height: 300px;
 }
@@ -586,6 +584,16 @@ header .icons #menu-bars {
 
 .order__button {
   text-align: center;
+}
+
+.table input {
+  background: #eee;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  color: var(--black);
+  text-transform: none;
+  margin-bottom: 1rem;
+  width: 36%;
 }
 
 /* CSS Footer */

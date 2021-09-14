@@ -1,4 +1,7 @@
-
+<?php
+    include("./function/manageCart.php");
+    session_start();
+?>
 <html lang="en">
 
 <head>
@@ -11,6 +14,10 @@
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="./css/style.css">
@@ -29,13 +36,12 @@
         <nav class="navbar">
             <a href="index.php">home</a>
             <a href="menu.php">menu</a>
-            <a class="active" href="order.php">order</a>
         </nav>
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
             <i class="fas fa-search" id="search-icon"></i>
-            <a id="myCart" href="#" class="fas fa-shopping-cart"></a>
+            <a href="order.php" class="fas fa-shopping-cart"></a>
             <a href="login.php" class="fa fa-user"></a>
         </div>
 
@@ -86,19 +92,39 @@
             
             <div class="order__menu">
                 <div class="order__body">
-                    <div class="cart-row">
-                        <span class="cart-item cart-header cart-column">Product</span>
-                        <span class="cart-price cart-header cart-column">Price</span>
-                        <span class="cart-quantity cart-header cart-column">Amount</span>
-                    </div>
-                    <div class="cart-items">
-                        <?php
-                            if (isset($_POST['submit']) || isset($_POST['image'])) {
-                                $img = $_POST['image'];
-                            }
-                        ?>
-                        <?php echo $img?>
-                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                if(isset($_SESSION['cart'])) {
+                                    foreach($_SESSION['cart'] as $value) {
+                                        echo "
+                                            <tr>
+                                                <td>$value[Title]</td>
+                                                <td>$value[Price]</td>
+                                                <td><input type='number' value='$value[Quantity]' min='1' max='15'></td>
+                                                <td>
+                                                    <form action='./function/manageCart.php' method='POST' style='padding: 0; width: 50; border: none;'>
+                                                        <button name='removeItem' class='p-1 btn-danger'>Remove</button>
+                                                        <input type='hidden' name='Title' value='$value[Title]'>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        ";
+                                    }
+                                }
+                            ?>
+                        </tbody>
+
+                    </table>
+
                     <div class="cart-total">
                         <strong class="cart-total-title">Total:</strong>
                         <span class="cart-total-price">0</span>
@@ -162,7 +188,6 @@
 
     <!-- custom js file link  -->
     <script src="./js/script.js"></script>
-    <script src="./js/btnCart.js"></script>
 
 </body>
 

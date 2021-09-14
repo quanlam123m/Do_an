@@ -1,5 +1,6 @@
 <?php
 include("./admin/config/constant.php");
+session_start();
 ?>
 <html lang="en">
 
@@ -17,6 +18,7 @@ include("./admin/config/constant.php");
     <!-- custom css file link  -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/modal.css">
+    <link rel="stylesheet" href="./css/menu.css">
 
 </head>
 
@@ -31,13 +33,12 @@ include("./admin/config/constant.php");
         <nav class="navbar">
             <a href="index.php">home</a>
             <a class="active" href="menu.php">menu</a>
-            <a href="order.php">order</a>
         </nav>
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
             <i class="fas fa-search" id="search-icon"></i>
-            <a id="myCart" href="#" class="fas fa-shopping-cart"></a>
+            <a href="order.php" class="fas fa-shopping-cart"></a>
             <a href="login.php" class="fa fa-user"></a>
         </div>
 
@@ -53,35 +54,6 @@ include("./admin/config/constant.php");
         <i class="fas fa-times" id="close"></i>
     </form>
 
-    <!-- Cart -->
-    <div id="cart" class="cart">
-        <div class="cart__content">
-            <div class="cart__header">
-                <h5 class="cart__title">Shopping Cart</h5>
-            </div>
-            <form action="./order.php" method="POST">
-                <div class="cart__body">
-                    <div class="cart-row">
-                        <span class="item cart-header cart-column">Product</span>
-                        <span class="price cart-header cart-column">Price</span>
-                        <span class="quantity cart-header cart-column">Amount</span>
-                    </div>
-                    <div class="cart-items">
-                    
-                    </div>
-                    <div class="cart__amount">
-                        <strong class="cart__total">Total:</strong>
-                        <span class="cart__price" name="total">$0</span>
-                    </div>
-                </div>
-
-                <div class="cart__footer">
-                    <button type="button" class="btn close">Close</button>
-                    <input type="submit" name="submit" class="btn" value="Payment">
-                </div>
-            </form>
-        </div>
-    </div>
     <!-- menu section starts  -->
 
     <section class="menu" id="menu">
@@ -101,194 +73,31 @@ include("./admin/config/constant.php");
                             $price = $rows['Price'];
                             $img = $rows['Image'];
                             $desc = $rows['Description'];
-                        }
 
-                        ?>
-                            <div class="box">
-                                <div class="image">
-                                    <img src="<?php echo $url; ?>images/food/<?php echo $img ?>" alt="" class="img">
-                                    <a href="#" class="fas fa-heart"></a>
-                                </div>
-                                <div class="content">
-                                    <div class="stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
+                            ?>
+                                <form action="./function/manageCart.php" method="POST">
+                                    <div class="box">
+                                        <div class="image">
+                                            <img src="<?php echo $url; ?>images/food/<?php echo $img ?>" alt="" class="img">
+                                            <a href="#" class="fas fa-heart"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="title"><?php echo $name;?></h3>
+                                            <input type="hidden" name="Title" value="<?php echo $name;?>">
+                                            <p><?php echo $desc; ?></p>
+                                            <input type="submit" value="Add Cart" class="btn" name="addCart">
+                                            <span class="price"><?php echo $price; ?></span>
+                                            <input type="hidden" name="Price" value="<?php echo $price; ?>">
+                                            <input type="number" name="Quantity" class="btn value" value="1" min="1" max="15">
+                                        </div>
                                     </div>
-                                    <h3 class="title"><?php echo $name;?></h3>
-                                    <p><?php echo $desc ?></p>
-                                    <a href="#" class="btn btn_Cart">add to cart</a>
-                                    <span class="price"><?php echo $price ?></span>
-                                </div>
-                            </div>
 
-                        <?php
+                                </form>
+                            <?php
+                        }
                     }
                 }
             ?>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-2.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-3.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-4.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-5.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-6.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-7.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-8.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/menu-9.jpg" alt="" class="img">
-                    <a href="#" class="fas fa-heart"></a>
-                </div>
-                <div class="content">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <h3 class="title">delicious food</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, accusantium.</p>
-                    <a href="#" class="btn btn_Cart">add to cart</a>
-                    <span class="price">12.99</span>
-                </div>
-            </div>
-
         </div>
 
     </section>
@@ -344,8 +153,6 @@ include("./admin/config/constant.php");
 
     <!-- custom js file link  -->
     <script src="./js/script.js"></script>
-    <script src="./js/btnCart.js"></script>
-    <script src="./js/addCart.js"></script>
 </body>
 
 </html>
