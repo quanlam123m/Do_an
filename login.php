@@ -43,6 +43,27 @@
     </div>
 
     <script src="./js/login.js"></script>
+    <!-- footer section ends -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- Script -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php
+        if(isset($_SESSION['loginFailed'])) {
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Account or password is wrong. Please check again',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            </script>
+            <?php
+            unset ($_SESSION['loginFailed']);
+        }
+    ?>
 </body>
 
 </html>

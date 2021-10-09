@@ -1,21 +1,21 @@
-let menu = document.querySelector('#menu-bars');
-let navbar = document.querySelector('.navbar');
+let menu = document.querySelector("#menu-bars");
+let navbar = document.querySelector(".navbar");
 
-menu.onclick = () =>{
-  menu.classList.toggle('fa-times');
-  navbar.classList.toggle('active');
-}
+menu.onclick = () => {
+  menu.classList.toggle("fa-times");
+  navbar.classList.toggle("active");
+};
 
-let section = document.querySelectorAll('section');
-let navLinks = document.querySelectorAll('header .navbar a');
+let section = document.querySelectorAll("section");
+let navLinks = document.querySelectorAll("header .navbar a");
 
-document.querySelector('#search-icon').onclick = () =>{
-  document.querySelector('#search-form').classList.toggle('active');
-}
+document.querySelector("#search-icon").onclick = () => {
+  document.querySelector("#search-form").classList.toggle("active");
+};
 
-document.querySelector('#close').onclick = () =>{
-  document.querySelector('#search-form').classList.remove('active');
-}
+document.querySelector("#close").onclick = () => {
+  document.querySelector("#search-form").classList.remove("active");
+};
 
 var swiper = new Swiper(".home-slider", {
   spaceBetween: 30,
@@ -28,7 +28,7 @@ var swiper = new Swiper(".home-slider", {
     el: ".swiper-pagination",
     clickable: true,
   },
-  loop:true,
+  loop: true,
 });
 
 var swiper = new Swiper(".review-slider", {
@@ -38,10 +38,10 @@ var swiper = new Swiper(".review-slider", {
     delay: 7500,
     disableOnInteraction: false,
   },
-  loop:true,
+  loop: true,
   breakpoints: {
     0: {
-        slidesPerView: 1,
+      slidesPerView: 1,
     },
     640: {
       slidesPerView: 2,
@@ -54,13 +54,5 @@ var swiper = new Swiper(".review-slider", {
     },
   },
 });
-
-function loader(){
-  document.querySelector('.loader-container').classList.add('fade-out');
-}
-
-function fadeOut(){
-  setInterval(loader, 3000);
-}
 
 window.onload = fadeOut;

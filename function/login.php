@@ -9,8 +9,8 @@
         $password = $_POST['password'];
 
         //2. SQL Query to check the username, password exist or not 
-        $sql1 = "SELECT Username, Password FROM User WHERE Username = '$username' and Password = '$password' and Role = 'Admin'";
-        $sql2 = "SELECT Username, Password FROM User WHERE Username = '$username' and Password = '$password' and Role = 'Guest'";
+        $sql1 = "SELECT * FROM User WHERE Username = '$username' and Password = '$password' and Role = 'Admin'";
+        $sql2 = "SELECT * FROM User WHERE Username = '$username' and Password = '$password' and Role = 'Guest'";
 
         //3. Execute Query
         $res1 = mysqli_query($conn, $sql1);
@@ -22,15 +22,31 @@
 
         if ($count1 == 1) {
             // User Available and user is Admin. Display Admin page
-            $_SESSION['user'] = $username; //To check the user is logged in or not and logout will unset it
+            $_SESSION['admin'] = $username; //To check the user is logged in or not and logout will unset it
             header("Location:".$url."admin/index.php");
         }
         else if ($count2 == 1) {
             // User Available and user is Guest. Display Guest page
-            header("Location:".$url."user/home.php");
+            $_SESSION['guest'] = $username;
+            $sql3 = "SELECT * FROM User WHERE Username = '$username'";
+            $res3 = mysqli_query($conn, $sql3);
+            if($res3 == TRUE) {
+                $count = mysqli_num_rows($res3);
+                if ($count > 0 ) {
+                    if ($rows = mysqli_fetch_assoc($res3)) {
+                        $_SESSION['id'] = $rows['User_ID'];
+                        $_SESSION['fullname'] = $rows['Fullname'];
+                        $_SESSION['email'] = $rows['Email'];
+                        $_SESSION['address'] = $rows['Address'];
+                        $_SESSION['phone'] = $rows['Phonenumber'];
+                        header("Location:".$url."user/index.php");
+                    }
+                }
+            }
         }
         else {
-            header("Location: https://www.facebook.com/");
+            $_SESSION['loginFailed'] = "Failed to login";
+            header("Location:".$url."login.php");
         }
     }
     else {

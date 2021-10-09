@@ -39,12 +39,9 @@
 
         // 5. Check whether the (Query is execute) data is inserted or not and display appropriate the message
         if ($res == TRUE) {
-            // Data Inserted
             header("Location:".$url."admin/food.php");
         }
         else {
-            // Failed to Insert Data
-            $_SESSION['fail'] = "Failed to insert data";
             header("Location:".$url."admin/food.php");
         }
     }

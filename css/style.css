@@ -13,6 +13,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  text-transform: capitalize;
   outline: none;
   border: none;
   transition: all 0.2s linear;
@@ -61,6 +62,7 @@ section:nth-child(even) {
 
 .btn:hover {
   background: var(--green);
+  color: #fff;
 }
 
 /* CSS Header */
@@ -100,6 +102,7 @@ header .navbar a.active,
 header .navbar a:hover {
   color: #fff;
   background: var(--green);
+  text-decoration: none;
 }
 
 header .icons i,
@@ -120,6 +123,7 @@ header .icons i:hover,
 header .icons a:hover {
   color: #fff;
   background: var(--green);
+  text-decoration: none;
   transform: rotate(360deg);
 }
 
@@ -511,20 +515,7 @@ header .icons #menu-bars {
   margin-top: 5rem;
 }
 
-.order__detail {
-  display: flex;
-}
-
-.order__form {
-  width: 60%;
-}
-
-.order__menu {
-  width: 40%;
-}
-
-.order form,
-.order .order__menu {
+.order form {
   max-width: 90rem;
   border-radius: 0.5rem;
   box-shadow: var(--box-shadow);
@@ -586,6 +577,10 @@ header .icons #menu-bars {
   text-align: center;
 }
 
+.order .order__menu .order__body button {
+  margin-right: 2rem;
+}
+
 .table input {
   background: #eee;
   border-radius: 0.5rem;
@@ -633,30 +628,6 @@ header .icons #menu-bars {
 
 .footer .credit span {
   color: var(--green);
-}
-
-/* CSS Load Page */
-.loader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10000;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.loader-container img {
-  width: 35rem;
-}
-
-.loader-container.fade-out {
-  top: -110%;
-  opacity: 0;
 }
 
 /* media queries  */

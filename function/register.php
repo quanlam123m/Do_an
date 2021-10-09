@@ -9,7 +9,7 @@
         $address = $_POST['address'];
         $phonenumber = $_POST['phonenumber'];
         $username = $_POST['username'];
-        $password = md5($_POST['password']);
+        $password = $_POST['password'];
 
         //2. SQL Query to save data 
         $sql = "INSERT INTO User SET

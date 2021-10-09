@@ -29,12 +29,10 @@
         // 4. Check whether the (Query is execute) data is inserted or not and display appropriate the message
         if ($res == TRUE) {
             // Data Inserted
-            $_SESSION['add'] = "Add Admin Successfully";
             header("Location:".$url."admin/account.php");
         }
         else {
             // Failed to Insert Data
-            $_SESSION['add'] = "Failed to Add Admin";
             header("Location:".$url."admin/account.php");
         }
     }

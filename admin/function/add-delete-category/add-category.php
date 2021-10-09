@@ -19,8 +19,6 @@
             header("Location:".$url."admin/category.php");
         }
         else {
-            // Failed to Insert Data
-            $_SESSION['add'] = "Failed to Add Category";
             header("Location:".$url."admin/category.php");
         }
     }

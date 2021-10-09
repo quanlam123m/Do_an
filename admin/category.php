@@ -13,6 +13,9 @@ include("./function/login-check.php");
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="./css/admin.css">
     <link rel="stylesheet" href="./css/add__modal.css">
@@ -28,7 +31,10 @@ include("./function/login-check.php");
             <a href="index.php">dashboard</a>
             <a href="food.php">food</a>
             <a href="account.php">account</a>
-            <a href="category.php" class="active">caregory</a>
+            <a href="category.php" class="active">category</a>
+            <a href="carousel.php">carousel</a>
+            <a href="dishes.php">dishes</a>
+            <a href="footer.php">footer</a>
             <a href="./function/logout.php">logout</a>
         </nav>
     </header>
@@ -72,7 +78,8 @@ include("./function/login-check.php");
                                 <td><?php echo $id; ?></td>
                                 <td><?php echo $name; ?></td>
                                 <td>
-                                    <a href="#" class="btn">Delete</a>
+                                    <button type="button" class="btn editBtn">Update</button>
+                                    <a href="./function/add-delete-category/delete-category.php?id=<?php echo $id ?>" class="btn">Delete</a>
                                 </td>
                             </tr>
                             <?php
@@ -93,7 +100,7 @@ include("./function/login-check.php");
             </div>
             <form action="./function/add-delete-category/add-category.php" method="POST">
                 <div class="modal__body">
-                    <p>Name:</p>
+                    <p>Category:</p>
                     <input type="text" class="name" name="name" placeholder="Name Category">
                 </div>
                 <div class="modal__button">
@@ -104,7 +111,54 @@ include("./function/login-check.php");
         </div>
     </div>
 
+    <!-- Modal 2 -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal__title">Edit Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="./function/add-delete-category/update-category.php" method="POST">
+                <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
+                    <div class="modal__body">
+                        <p>Category:</p>
+                        <input type="text" id="cate" name="cate">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" name="submit" value="Update" class="btn">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
     <script src="./js/addCategory.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.editBtn').on("click", function() {
+                
+                $('#editModal').modal('show');
+
+                $tr = $(this).closest('tr')
+                
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                $("#id").val(data[0])
+                $("#cate").val(data[1])
+            })
+        });
+    </script>
 </body>
 
 </html>

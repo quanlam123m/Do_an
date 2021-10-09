@@ -1,0 +1,78 @@
+.order {
+  margin-top: 5rem;
+}
+
+.order form {
+  max-width: 90rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  background: #fff;
+  padding: 1.5rem;
+  margin: 0 auto;
+}
+
+.order .order__menu .order__body table {
+  overflow-y: auto;
+  height: 300px;
+}
+
+.order .inputBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.order .inputBox .input {
+  width: 49%;
+}
+
+.order .inputBox .input span {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--light-color);
+}
+
+.order .inputBox .input input,
+.order .inputBox .input textarea {
+  background: #eee;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: var(--black);
+  text-transform: none;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.order .inputBox .input input:focus,
+.order .inputBox .input textarea:focus {
+  border: 0.1rem solid var(--green);
+}
+
+.order .inputBox .input textarea {
+  height: 20rem;
+  resize: none;
+}
+
+.order .btn {
+  margin-top: 0;
+}
+
+.content {
+  margin-bottom: 7rem;
+}
+
+.account {
+  margin-top: 8rem;
+}
+
+.content {
+  margin-top: 5rem;
+}
+
+table th,
+table td {
+  padding-right: 5rem !important;
+}

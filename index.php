@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+include("./admin/config/constant.php");
+?>
 <html lang="en">
 
 <head>
@@ -23,10 +25,10 @@
 
     <header>
 
-        <a href="index.html" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="index.php" class="logo"><i class="fas fa-utensils"></i>resto.</a>
 
         <nav class="navbar">
-            <a class="active" href="index.html">home</a>
+            <a class="active" href="index.php">home</a>
             <a href="menu.php">menu</a>
         </nav>
 
@@ -57,48 +59,35 @@
 
             <div class="swiper-wrapper wrapper">
 
-                <div class="swiper-slide slide">
-                    <div class="content">
-                        <span>our special dish</span>
-                        <h3>spicy noodles</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                        <a href="#" class="btn">order now</a>
-                    </div>
-                    <div class="image">
-                        <img src="images/home-img-1.png" alt="">
-                    </div>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="content">
-                        <span>our special dish</span>
-                        <h3>fried chicken</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                        <a href="#" class="btn">order now</a>
-                    </div>
-                    <div class="image">
-                        <img src="images/home-img-2.png" alt="">
-                    </div>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <div class="content">
-                        <span>our special dish</span>
-                        <h3>hot pizza</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                        <a href="#" class="btn">order now</a>
-                    </div>
-                    <div class="image">
-                        <img src="images/home-img-3.png" alt="">
-                    </div>
-                </div>
-
+            <?php
+                $sql2 = "SELECT * FROM carousel";
+                $res2 = mysqli_query($conn, $sql2);
+                if($res2 == TRUE) {
+                    $count = mysqli_num_rows($res2);
+                    if ($count > 0 ) {
+                        while ($rows = mysqli_fetch_assoc($res2)) {
+                            $name = $rows['Name'];
+                            $img = $rows['Image'];
+                            $des = $rows['Description'];
+                            ?>
+                                  <div class="swiper-slide slide">
+                                        <div class="content">
+                                            <span>Our Special Dish</span>
+                                            <h3><?php echo $name ?></h3>
+                                            <p><?php echo $des ?></p>
+                                            <a href="menu.php" class="btn">order now</a>
+                                        </div>
+                                        <div class="image">
+                                            <img src="<?php echo $url; ?>images/carousel/<?php echo $img ?>" alt="">
+                                        </div>
+                                    </div>
+                            <?php
+                        }
+                    }
+                }
+            ?>
             </div>
-
-            <div class="swiper-pagination"></div>
-
         </div>
-
     </section>
 
     <!-- home section ends -->
@@ -112,66 +101,26 @@
 
         <div class="box-container">
 
-            <div class="box">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-                <img src="images/dish-1.png" alt="">
-                <h3>tasty food</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <a href="#" class="btn">Show more</a>
-            </div>
-
-            <div class="box">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-                <img src="images/dish-2.png" alt="">
-                <h3>tasty food</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <a href="#" class="btn">Show more</a>
-            </div>
-
-            <div class="box">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-                <img src="images/dish-3.png" alt="">
-                <h3>tasty food</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <a href="#" class="btn">Show more</a>
-            </div>
-
-            <div class="box">
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-                <img src="images/dish-4.png" alt="">
-                <h3>tasty food</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <a href="#" class="btn">Show more</a>
-            </div>
-        </div>
+            <?php
+                $sql = "SELECT * FROM dishes";
+                $res = mysqli_query($conn, $sql);
+                if($res == TRUE) {
+                    $count = mysqli_num_rows($res);
+                    if ($count > 0 ) {
+                        while ($rows = mysqli_fetch_assoc($res)) {
+                            $name = $rows['Name'];
+                            $img = $rows['Image'];
+                            ?>
+                                 <div class="box">
+                                    <img src="<?php echo $url; ?>images/dish/<?php echo $img ?>" alt="" class="img">
+                                    <h3><?php echo $name ?></h3>
+                                    <a href="menu.php" class="btn">Show more</a>
+                                </div>
+                            <?php
+                        }
+                    }
+                }
+            ?>
 
     </section>
 
@@ -211,7 +160,6 @@
                         <span>24/7 service</span>
                     </div>
                 </div>
-                <a href="#" class="btn">learn more</a>
             </div>
 
         </div>
@@ -220,149 +168,43 @@
 
     <!-- about section ends -->
 
-    <!-- review section starts  -->
-
-    <section class="review" id="review">
-
-        <h3 class="sub-heading"> customer's review </h3>
-        <h1 class="heading"> what they say </h1>
-
-        <div class="swiper-container review-slider">
-
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="images/pic-1.png" alt="">
-                        <div class="user-info">
-                            <h3>john deo</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus
-                        aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis
-                        laborum aspernatur quibusdam. Ipsum, magni.</p>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="images/pic-2.png" alt="">
-                        <div class="user-info">
-                            <h3>john deo</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus
-                        aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis
-                        laborum aspernatur quibusdam. Ipsum, magni.</p>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="images/pic-3.png" alt="">
-                        <div class="user-info">
-                            <h3>john deo</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus
-                        aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis
-                        laborum aspernatur quibusdam. Ipsum, magni.</p>
-                </div>
-
-                <div class="swiper-slide slide">
-                    <i class="fas fa-quote-right"></i>
-                    <div class="user">
-                        <img src="images/pic-4.png" alt="">
-                        <div class="user-info">
-                            <h3>john deo</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus
-                        aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis
-                        laborum aspernatur quibusdam. Ipsum, magni.</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- review section ends -->
-
     <!-- footer section starts  -->
 
     <section class="footer">
 
         <div class="box-container">
 
-            <div class="box">
-                <h3>locations</h3>
-                <a href="#">india</a>
-                <a href="#">japan</a>
-                <a href="#">russia</a>
-                <a href="#">USA</a>
-                <a href="#">france</a>
-            </div>
+        <?php
+                $sql3 = "SELECT * FROM footer";
+                $res3 = mysqli_query($conn, $sql3);
+                if($res3 == TRUE) {
+                    $count = mysqli_num_rows($res3);
+                    if ($count > 0 ) {
+                        while ($rows = mysqli_fetch_assoc($res3)) {
+                            $email = $rows['Email'];
+                            $phone = $rows['Phone'];
+                            $social = $rows['Social_Media']
+                            ?>
+                                <div class="box">
+                                    <h3>Contact Info</h3>
+                                    <a href="#"><?php echo $phone ?></a>
+                                    <a href="#"><?php echo $email ?></a>
+                                </div>
 
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="#">home</a>
-                <a href="#">menu</a>
-                <a href="#">order</a>
-            </div>
-
-            <div class="box">
-                <h3>contact info</h3>
-                <a href="#">091-841-4170</a>
-                <a href="#">quocquan052000@gmail.com</a>
-            </div>
-
-            <div class="box">
-                <h3>follow us</h3>
-                <a href="#">facebook</a>
-                <a href="#">instagram</a>
-                <a href="#">linkedin</a>
-            </div>
+                                <div class="box">
+                                    <h3>Follow Us</h3>
+                                    <a href="<?php echo $social ?>">facebook</a>
+                                </div>
+                            <?php
+                        }
+                    }
+                }
+            ?>
 
         </div>
     </section>
 
     <!-- footer section ends -->
-
-    <!-- loader part  -->
-    <div class="loader-container">
-        <img src="images/loader.gif" alt="">
-    </div>
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
