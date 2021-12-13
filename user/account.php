@@ -32,7 +32,7 @@ include("../admin/config/constant.php");
 
     <header>
 
-        <a href="index.html" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="index.html" class="logo"><i class="fas fa-utensils"></i>Kaito</a>
 
         <nav class="navbar">
             <a href="index.php">home</a>
@@ -43,21 +43,12 @@ include("../admin/config/constant.php");
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
-            <i class="fas fa-search" id="search-icon"></i>
             <a href="order.php" class="fas fa-shopping-cart"></a>
         </div>
 
     </header>
 
     <!-- header section ends-->
-
-    <!-- search form  -->
-
-    <form action="" id="search-form">
-        <input type="search" placeholder="search here..." name="" id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-        <i class="fas fa-times" id="close"></i>
-    </form>
 
     <section class="about account" id="about">
         
@@ -155,19 +146,19 @@ include("../admin/config/constant.php");
                             <input type="hidden" id="id" name="id" value="<?php echo $_SESSION['id'] ?>">
                                 <div class="modal__body">
                                     <p>your name:</p>
-                                    <input type="text" id="name" name="fname">
+                                    <input type="text" id="name" name="fname" value="<?php echo $_SESSION['fullname']; ?>">
                                 </div>
                                 <div class="modal__body">
                                     <p>your number:</p>
-                                    <input type="text" id="phonenumber" name="phonenumber">
+                                    <input type="text" id="phonenumber" name="phonenumber" value="<?php echo $_SESSION['phone']; ?>">
                                 </div>
                                 <div class="modal__body">
                                     <p>your email:</p>
-                                    <input type="text" id="email" name="email">
+                                    <input type="text" id="email" name="email" value="<?php echo $_SESSION['email']; ?>">
                                 </div>
                                 <div class="modal__body">
                                     <p>your address:</p>
-                                    <input type="text" id="address" name="address">
+                                    <input type="text" id="address" name="address" value="<?php echo $_SESSION['address']; ?>">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

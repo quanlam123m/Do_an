@@ -675,10 +675,10 @@ header .icons #menu-bars {
     background: #eee;
   }
 
-  #search-form #search-box {
+  /* #search-form #search-box {
     width: 90%;
     margin: 0 1rem;
-  }
+  } */
 
   .home .home-slider .slide .content h3 {
     font-size: 5rem;

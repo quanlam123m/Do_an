@@ -8,7 +8,7 @@
         $fullname = $_POST['fname'];
         $email = $_POST['email'];
         $address = $_POST['address'];
-        $phonenumber = $_POST['phoneNumber']; 
+        $phonenumber = $_POST['phonenumber']; 
 
         // 2. SQL Query to update data into database 
         $sql = "UPDATE User SET 

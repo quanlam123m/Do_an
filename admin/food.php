@@ -26,13 +26,14 @@ include("./function/login-check.php");
     <!-- header section starts      -->
 
     <header>
-        <a href="#" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="#" class="logo"><i class="fas fa-utensils"></i>Admin</a>
         <nav class="navbar">
             <a href="index.php">dashboard</a>
             <a href="food.php" class="active">food</a>
             <a href="account.php">account</a>
             <a href="category.php">category</a>
             <a href="carousel.php">carousel</a>
+            <a href="coupon.php">coupon</a>
             <a href="dishes.php">dishes</a>
             <a href="footer.php">footer</a>
             <a href="./function/logout.php">logout</a>

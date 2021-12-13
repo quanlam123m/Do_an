@@ -7,7 +7,7 @@ include("./admin/config/constant.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Responsive Food Website Design Tutorial</title>
+    <title>Kaito's Retaurant</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
@@ -31,7 +31,7 @@ include("./admin/config/constant.php");
 
     <header>
 
-        <a href="index.php" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="index.php" class="logo"><i class="fas fa-utensils"></i>Kaito</a>
 
         <nav class="navbar">
             <a href="index.php">home</a>
@@ -40,7 +40,6 @@ include("./admin/config/constant.php");
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
-            <i class="fas fa-search" id="search-icon"></i>
             <a href="order.php" class="fas fa-shopping-cart"></a>
             <a href="login.php" class="fa fa-user"></a>
         </div>
@@ -48,14 +47,6 @@ include("./admin/config/constant.php");
     </header>
 
     <!-- header section ends-->
-
-    <!-- search form  -->
-
-    <form action="" id="search-form">
-        <input type="search" placeholder="search here..." name="" id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-        <i class="fas fa-times" id="close"></i>
-    </form>
 
     <!-- menu section starts  -->
 

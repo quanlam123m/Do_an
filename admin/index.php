@@ -27,12 +27,13 @@ include("./function/login-check.php");
     <!-- header section starts      -->
 
     <header>
-        <a href="#" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="#" class="logo"><i class="fas fa-utensils"></i>Admin</a>
         <nav class="navbar">
             <a href="index.php" class="active">dashboard</a>
             <a href="food.php">food</a>
             <a href="account.php">account</a>
             <a href="category.php">category</a>
+            <a href="coupon.php">coupon</a>
             <a href="carousel.php">carousel</a>
             <a href="dishes.php">dishes</a>
             <a href="footer.php">footer</a>
@@ -56,6 +57,7 @@ include("./function/login-check.php");
                             <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col">Order</th>
+                            <th scope="col">Total Price</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -73,6 +75,7 @@ include("./function/login-check.php");
                                 $email = $rows['Email'];
                                 $phone = $rows['Phonenumber'];
                                 $address = $rows['Address'];
+                                $total_price = $rows['Total_Price'];
                                 $status = $rows['Status'];
 
                                 ?>
@@ -112,6 +115,7 @@ include("./function/login-check.php");
                                             </tbody>
                                         </table>
                                     </td>
+                                    <td><?php echo $total_price ?></td>
                                     <td><?php echo $status ?></td>
                                     <td>
                                         <button class="btn editBtn" name="editBtn">Update</button>

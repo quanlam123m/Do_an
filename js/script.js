@@ -9,19 +9,11 @@ menu.onclick = () => {
 let section = document.querySelectorAll("section");
 let navLinks = document.querySelectorAll("header .navbar a");
 
-document.querySelector("#search-icon").onclick = () => {
-  document.querySelector("#search-form").classList.toggle("active");
-};
-
-document.querySelector("#close").onclick = () => {
-  document.querySelector("#search-form").classList.remove("active");
-};
-
 var swiper = new Swiper(".home-slider", {
   spaceBetween: 30,
   centeredSlides: true,
   autoplay: {
-    delay: 7500,
+    delay: 5000,
     disableOnInteraction: false,
   },
   pagination: {
@@ -35,7 +27,7 @@ var swiper = new Swiper(".review-slider", {
   spaceBetween: 20,
   centeredSlides: true,
   autoplay: {
-    delay: 7500,
+    delay: 5000,
     disableOnInteraction: false,
   },
   loop: true,

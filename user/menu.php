@@ -30,7 +30,7 @@ include("../admin/config/constant.php");
 
     <header>
 
-        <a href="index.html" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="index.html" class="logo"><i class="fas fa-utensils"></i>Kaito</a>
 
         <nav class="navbar">
             <a href="index.php">home</a>
@@ -41,7 +41,6 @@ include("../admin/config/constant.php");
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
-            <i class="fas fa-search" id="search-icon"></i>
             <a href="order.php" class="fas fa-shopping-cart"></a>
         </div>
 
@@ -49,13 +48,6 @@ include("../admin/config/constant.php");
 
     <!-- header section ends-->
 
-    <!-- search form  -->
-
-    <form action="" id="search-form">
-        <input type="search" placeholder="search here..." name="" id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-        <i class="fas fa-times" id="close"></i>
-    </form>
 
     <!-- menu section starts  -->
 

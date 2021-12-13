@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Responsive Food Website Design Tutorial</title>
+    <title>Kaito's Retaurant</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
@@ -30,7 +30,7 @@
 
     <header>
 
-        <a href="index.php" class="logo"><i class="fas fa-utensils"></i>resto.</a>
+        <a href="index.php" class="logo"><i class="fas fa-utensils"></i>Kaito</a>
 
         <nav class="navbar">
             <a href="index.php">home</a>
@@ -39,7 +39,6 @@
 
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
-            <i class="fas fa-search" id="search-icon"></i>
             <a href="order.php" class="fas fa-shopping-cart"></a>
             <a href="login.php" class="fa fa-user"></a>
         </div>
@@ -47,14 +46,6 @@
     </header>
 
     <!-- header section ends-->
-
-    <!-- search form  -->
-
-    <form action="" id="search-form">
-        <input type="search" placeholder="search here..." name="" id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
-        <i class="fas fa-times" id="close"></i>
-    </form>
 
     <!-- order section starts  -->
     <section class="order" id="order">
@@ -73,6 +64,7 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Total</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -88,7 +80,7 @@
                                                     <td>
                                                         <input type='number' class='text-center iquantity' name='Mod_Quantity' onchange='this.form.submit()' value='$value[Quantity]' min='1' max='15'></td>
                                                         <input type='hidden' name='Title' value='$value[Title]' />
-                                                    <td class='itotal'></td>
+                                                    <td class='itotal' name='itotal'></td>
                                                     <td>
                                                         <button name='removeItem' class='btn-danger' style='padding: 2px'>Remove</button>
                                                         <input type='hidden' name='Title' value='$value[Title]' />
@@ -101,16 +93,24 @@
                             </tbody>
 
                         </table>
-
+                                    
+                        <div class="inputBox">
+                            <div class="input" style="display: flex">
+                                <input id="coupon_code" name="coupon" type="text" placeholder="enter your coupon">
+                                <input id="apply" type="button" name="coupon" style="margin-left: 0 !important; margin-bottom: 1rem; color: #fff; 
+                                background:#c43b68" onclick="set_coupon()" value="Apply">
+                            </div>
+                        </div>
+                        
                         <div class="cart-total">
                             <strong class="cart-total-title">Total Price:</strong>
-                            <span id="gtotal" class="cart-total-price"></span>
+                            <span id="gtotal" name="price" class="cart-total-price"></span>
+                            <input name='total' type='hidden' id="total_cart" value=""/>
                         </div>
+                        
                     </div>
                 </div>
-        </form>
 
-        <form action="./function/purchase.php" method="POST">
             <div class="order__form">
                         <div class="inputBox">
                             <div class="input">
@@ -179,7 +179,7 @@
     
 
     <!-- footer section ends -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Script -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
@@ -199,13 +199,45 @@
             gt = gt + (iprice[i].value) * (iquantity[i].value);
         }
 
-        gtotal.innerText=gt.toFixed(2);
+        gtotal.innerText = gt.toFixed(2);
+        document.getElementById("total_cart").value = gt.toFixed(2);
         }
 
         subTotal()
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function set_coupon() {
+            var coupon_str = jQuery('#coupon_code').val()
+            var total_price = document.getElementById("total_cart")
+            var price = document.getElementById("gtotal")
+            if(coupon_str !="") {
+                jQuery.ajax({
+                    url: 'set_coupon.php',
+                    type: 'POST',
+                    data: 'coupon_str='+coupon_str,
+                    success: function(dataResult) {
+                        var dataResult = JSON.parse(dataResult);
+                        if(dataResult.statusCode == 200) {
+                            var after_apply = $('#total_cart').val() * dataResult.value;
+                            // $('#gtotal').val(after_apply);
+                            total_price.value = after_apply.toFixed(2);
+                            price.innerText = total_price.value;
+                        }
+                        else if(dataResult.statusCode == 400) {
+                            alert("Invalid promocode !");
+                        }
+                    }
+                })
+            }
+            else {
+                alert("Please enter valid promo code");
+            }
+            
+        }
+    </script>
 
     
     <?php
@@ -224,6 +256,9 @@
             unset ($_SESSION['purchase']);
         }
     ?>
+    <script>
+        
+    </script>
 
 
 </body>

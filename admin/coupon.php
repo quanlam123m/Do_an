@@ -16,7 +16,6 @@ include("./function/login-check.php");
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="./css/admin.css">
     <link rel="stylesheet" href="./css/add__modal.css">
@@ -33,35 +32,34 @@ include("./function/login-check.php");
             <a href="food.php">food</a>
             <a href="account.php">account</a>
             <a href="category.php">category</a>
-            <a href="coupon.php">coupon</a>
+            <a href="coupon.php" class="active">coupon</a>
             <a href="carousel.php">carousel</a>
             <a href="dishes.php">dishes</a>
-            <a href="footer.php" class="active">footer</a>
+            <a href="footer.php">footer</a>
             <a href="./function/logout.php">logout</a>
         </nav>
     </header>
 
     <div class="header">
-        <h1 class="heading"> Footer Management </h1>
+        <h1 class="heading"> Coupon Management </h1>
     </div>
 
     <div class="icon add">
-        <a id="addFooter" href="#" class="btn">Add Footer</a>
+        <a id="addCoupon" href="#" class="btn">Add Coupon</a>
     </div>
 
     <div class="table">
         <table class="tb-1">
             <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Social Media</th>
+                <th>Code</th>
+                <th>Value</th>
                 <th>Action</th>
             </tr>
 
             <?php
                 // Query to select all Category
-                $sql = "SELECT * FROM Footer";
+                $sql = "SELECT * FROM coupon";
                 // Execute Query
                 $res = mysqli_query($conn, $sql);
                 if ($res == TRUE ) {
@@ -73,21 +71,19 @@ include("./function/login-check.php");
                             // And while loop will run as long as we have data in database 
     
                             // Get data 
-                            $id = $rows['Footer_ID'];
-                            $email = $rows['Email'];
-                            $phone = $rows['Phone'];
-                            $social = $rows['Social_Media']
+                            $id = $rows['Coupon_ID'];
+                            $name = $rows['Coupon_Code'];
+                            $value = $rows['Coupon_Value'];
     
                             // Display value into table 
                             ?>
                             <tr>
                                 <td><?php echo $id; ?></td>
-                                <td><?php echo $email; ?></td>
-                                <td><?php echo $phone; ?></td>
-                                <td><?php echo $social; ?></td>
+                                <td><?php echo $name; ?></td>
+                                <td><?php echo $value; ?></td>
                                 <td>
                                     <button type="button" class="btn editBtn">Update</button>
-                                    <a href="./function/add-delete-footer/delete-footer.php?id=<?php echo $id ?>" class="btn">Delete</a>
+                                    <a href="./function/add-delete-coupon/delete-coupon.php?id=<?php echo $id ?>" class="btn">Delete</a>
                                 </td>
                             </tr>
                             <?php
@@ -103,21 +99,15 @@ include("./function/login-check.php");
     <div id="admin__modal">
         <div class="modal__content">
             <div class="modal__header">
-                <h5 class="modal__title">Add Footer</h5>
+                <h5 class="modal__title">Add Coupon</h5>
                 <span class="close">&times;</span>
             </div>
-            <form action="./function/add-delete-footer/add-footer.php" method="POST">
+            <form action="./function/add-delete-coupon/add-coupon.php" method="POST">
                 <div class="modal__body">
-                    <p>Email:</p>
-                    <input type="text" name="email">
-                </div>
-                <div class="modal__body">
-                    <p>Phone:</p>
-                    <input type="text" name="phone">
-                </div>
-                <div class="modal__body">
-                    <p>Social Media:</p>
-                    <input type="text" name="social">
+                    <p>Code:</p>
+                    <input type="text" class="name" name="code" placeholder="Coupon Code">
+                    <p>Value:</p>
+                    <input type="text" class="name" name="value" placeholder="Coupon Value">
                 </div>
                 <div class="modal__button">
                     <input type="submit" name="submit" value="Add" class="btn">
@@ -132,25 +122,21 @@ include("./function/login-check.php");
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal__title">Edit Footer</h5>
+                <h5 class="modal__title">Edit Coupon</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="./function/add-delete-footer/update-footer.php" method="POST">
+                <form action="./function/add-delete-coupon/update-coupon.php" method="POST">
                 <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
                     <div class="modal__body">
-                        <p>Email:</p>
-                        <input type="text" id="email" name="email">
+                        <p>Code:</p>
+                        <input type="text" id="code" name="nCode">
                     </div>
                     <div class="modal__body">
-                        <p>Phone:</p>
-                        <input type="text" id="phone" name="phone">
-                    </div>
-                    <div class="modal__body">
-                        <p>Social Media:</p>
-                        <input type="text" id="social" name="social">
+                        <p>Value:</p>
+                        <input type="text" id="value" name="nValue">
                     </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -162,7 +148,7 @@ include("./function/login-check.php");
     </div>
     </div>
 
-    <script src="./js/addFooter.js"></script>
+    <script src="./js/addCoupon.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
@@ -179,9 +165,8 @@ include("./function/login-check.php");
                 }).get();
 
                 $("#id").val(data[0])
-                $("#email").val(data[1])
-                $("#phone").val(data[2])
-                $("#social").val(data[3])
+                $("#code").val(data[1])
+                $("#value").val(data[2])
             })
         });
     </script>
