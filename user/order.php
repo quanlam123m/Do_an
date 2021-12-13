@@ -94,15 +94,21 @@
 
                         </table>
 
+                        <div class="inputBox">
+                            <div class="input" style="display: flex">
+                                <input id="coupon_code" name="coupon" type="text" placeholder="enter your coupon">
+                                <input id="apply" type="button" name="coupon" style="margin-left: 0 !important; margin-bottom: 1rem; color: #fff; 
+                                background:#c43b68" onclick="set_coupon()" value="Apply">
+                            </div>
+                        </div>
+
                         <div class="cart-total">
                             <strong class="cart-total-title">Total Price:</strong>
                             <span id="gtotal" class="cart-total-price"></span>
+                            <input name='total' type='hidden' id="total_cart" value=""/>
                         </div>
                     </div>
                 </div>
-        </form>
-
-        <form action="./function/purchase.php" method="POST">
             <div class="order__form">
                         <div class="inputBox">
                             <input name="id" type="hidden" value="<?php echo $_SESSION['id']; ?>">
@@ -172,12 +178,12 @@
     
 
     <!-- footer section ends -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Script -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
     <!-- custom js file link  -->
-    <script src="./js/script.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         var iprice = document.getElementsByClassName("iprice");
         var iquantity = document.getElementsByClassName("iquantity");
@@ -193,12 +199,44 @@
         }
 
         gtotal.innerText=gt.toFixed(2);
+        document.getElementById("total_cart").value = gt.toFixed(2);
         }
 
         subTotal()
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function set_coupon() {
+            var coupon_str = jQuery('#coupon_code').val()
+            var total_price = document.getElementById("total_cart")
+            var price = document.getElementById("gtotal")
+            if(coupon_str !="") {
+                jQuery.ajax({
+                    url: 'set_coupon.php',
+                    type: 'POST',
+                    data: 'coupon_str='+coupon_str,
+                    success: function(dataResult) {
+                        var dataResult = JSON.parse(dataResult);
+                        if(dataResult.statusCode == 200) {
+                            var after_apply = $('#total_cart').val() * dataResult.value;
+                            // $('#gtotal').val(after_apply);
+                            total_price.value = after_apply.toFixed(2);
+                            price.innerText = total_price.value;
+                        }
+                        else if(dataResult.statusCode == 400) {
+                            alert("Invalid promocode !");
+                        }
+                    }
+                })
+            }
+            else {
+                alert("Please enter valid promo code");
+            }
+            
+        }
+    </script>
 
     
     <?php
