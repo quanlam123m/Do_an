@@ -7,8 +7,8 @@
         $id = $_POST['id'];
         $name = $_POST['name'];
         $price = $_POST['price'];
-        $category = $_POST['category']; 
-        $image = $_POST['image'];
+        // $image = $_POST['image'];
+        // $category = $_POST['category']; 
         $description = $_POST['description'];
 
         // 2. Upload Image if selected
@@ -24,29 +24,19 @@
 
                 $upload = move_uploaded_file($src, $dst);
             }
-
-            if($image !="") {
-                $remove_path = "../../../images/food/".$image;
-                $remove = unlink($remove_path);
-            }
-
-        }
-        else {
-            $image_name = $image;
         }
 
         // 3. SQL Query to update data into database 
-        $sql = "UPDATE Food SET 
+        $sql = "UPDATE food SET 
                 Name = '$name',
                 Price = '$price',
                 Image = '$image_name',
-                Category_ID  = '$category',
                 Description = '$description'
                 WHERE Food_ID = $id
                 ";
 
         // 3. Execute Query 
-        $res = mysqli_query($conn, $sql) or die (mysqli_error());
+        $res = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
         // 4. Checl whether the (Query is execute) data is inserted or not and display appropriate the message
         if($res == TRUE) {
